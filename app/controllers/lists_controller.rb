@@ -10,14 +10,14 @@ before_action :set_list, only: %i[show destroy]
   end
 
   def show
-    @list = List.find(params[:id])
+
   end
 
 
   def create
     @list = List.new(list_params)
     if @list.save
-      redirect_to list_path(@list)
+      redirect_to list_path(@list.id)
     else
       render :new, status: :unprocessable_entity
     end
@@ -25,7 +25,7 @@ before_action :set_list, only: %i[show destroy]
 
   private
   def list_params
-    params.require(:list).permit(:name)
+    params.require(:list).permit(:name, :photo)
   end
 
   def set_list
